@@ -1,30 +1,129 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AdZonda - Gana viendo anuncios</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>AdZonda - Construye sitios web sin complicaciones</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #3498db;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 0.5rem 0 0 0;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    section h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+
+    ul {
+      list-style: disc inside;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #555;
+      padding-left: 1rem;
+    }
+
+    a.cta-button {
+      display: inline-block;
+      background: #3498db;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    a.cta-button:hover {
+      background: #2980b9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      color: #999;
+      background: #f0f4f8;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>AdZonda</h1>
-    <p>Gana viendo anuncios de forma segura y sencilla</p>
+    <p>Construye sitios web increíbles sin programar, usando un lenguaje sencillo y poderoso.</p>
   </header>
 
   <main>
-    <div id="ads-container">
-      <!-- Anuncios cargados por JS -->
-    </div>
+    <section>
+      <h2>¿Qué es AdZonda?</h2>
+      <p>AdZonda es una plataforma y lenguaje declarativo que permite crear páginas web profesionales con solo unas pocas líneas de texto. Ideal para quienes no quieren lidiar con HTML, CSS o JavaScript.</p>
+    </section>
 
-    <button id="load-ads-btn">Ver más anuncios</button>
+    <section>
+      <h2>¿Por qué usar AdZonda?</h2>
+      <ul>
+        <li>Sintaxis simple y amigable para crear imágenes, botones, textos y más.</li>
+        <li>Genera sitios responsive y modernos automáticamente.</li>
+        <li>Permite agregar eventos como clicks, animaciones y efectos sin código complejo.</li>
+        <li>Compatible con cualquier navegador moderno.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>¿Cómo funciona?</h2>
+      <p>Solo necesitas dos archivos: un <code>index.html</code> que carga nuestra librería, y un archivo <code>void.adzonda</code> donde escribes la estructura y contenido de tu sitio en lenguaje AdZonda.</p>
+      <a href="https://github.com/tu-usuario/adzonda" target="_blank" class="cta-button">Ver en GitHub</a>
+    </section>
   </main>
 
   <footer>
-    &copy; 2025 AdZonda - Todos los derechos reservados
+    &copy; 2025 Andrés - Pro-Builder & AdZonda
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
