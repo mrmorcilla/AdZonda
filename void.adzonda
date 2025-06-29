@@ -1,10 +1,11 @@
 MAIN IMAGE "imagen1" = logo.jpg
 MAIN BUTTON "boton1" = Presioname
 MAIN BUTTON "boton2" = Saludar
+MAIN TEXT = ¡Bienvenido a Pro-Builder!
 
 EVENTS:
-"boton2" = STYLE BACKGROUND RED
-"imagen1" HOVER = COLOR ROJO SCALE 1.05
+"boton2" HOVER = COLOR rojo SCALE 1.05
+"imagen1" HOVER = SCALE 1.1
 "boton2" CLICK = ALERT ¡Hola, amigo!
 "boton1" CLICK = REDIRECT https://wikipedia.org
-"imagen1" HIDEONCLICK = HIDEONCLICK
+"imagen1" HIDEONCLICK =

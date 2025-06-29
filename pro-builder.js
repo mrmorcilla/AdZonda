@@ -1,9 +1,15 @@
 (async () => {
-  const response = await fetch('void.structure');
+  const response = await fetch('void.adzonda');
   const text = await response.text();
   const lines = text.split('\n').map(l => l.trim()).filter(l => l);
 
   const body = document.body;
+  body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  body.style.margin = '20px auto';
+  body.style.maxWidth = '900px';
+  body.style.lineHeight = '1.6';
+  body.style.color = '#333';
+
   const sections = {};
   const aliases = {};
   const pendingEvents = [];
@@ -12,11 +18,14 @@
 
   function createSectionIfNeeded(name) {
     if (!sections[name]) {
-      const div = document.createElement('div');
+      const div = document.createElement('section');
       div.id = name.toLowerCase();
-      div.style.padding = '10px';
-      div.style.marginBottom = '20px';
-      div.style.display = 'block'; // Asegura visibilidad
+      div.style.padding = '20px';
+      div.style.marginBottom = '30px';
+      div.style.display = 'block';
+      div.style.borderRadius = '12px';
+      div.style.backgroundColor = '#fafafa';
+      div.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
       body.appendChild(div);
       sections[name] = div;
     }
@@ -25,29 +34,47 @@
 
   function applyStyle(el, prop, val) {
     const p = prop.toUpperCase();
-    if (p === 'COLOR') el.style.color = val;
-    if (p === 'ALIGN') el.style.textAlign = val;
-    if (p === 'SIZE') el.style.fontSize = val;
-    if (p === 'BACKGROUND') el.style.backgroundColor = val;
-    if (val.toLowerCase() === 'rainbow') {
-      el.style.backgroundImage = 'linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)';
-      el.style.webkitBackgroundClip = 'text';
-      el.style.webkitTextFillColor = 'transparent';
+    const value = parseColor(val);
+    switch (p) {
+      case 'COLOR':
+        el.style.color = value;
+        break;
+      case 'ALIGN':
+        el.style.textAlign = val;
+        break;
+      case 'SIZE':
+        el.style.fontSize = val;
+        break;
+      case 'BACKGROUND':
+        if (value === 'rainbow') {
+          el.style.backgroundImage = 'linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)';
+          el.style.webkitBackgroundClip = 'text';
+          el.style.webkitTextFillColor = 'transparent';
+          el.style.backgroundClip = 'text';
+          el.style.textFillColor = 'transparent';
+        } else {
+          el.style.backgroundColor = value;
+        }
+        break;
+      case 'BORDER':
+        el.style.border = val;
+        break;
+      default:
+        break;
     }
   }
 
-  // Función para interpretar colores comunes en español/inglés simple
   function parseColor(name) {
     const colors = {
-      rojo: 'red',
-      azul: 'blue',
-      verde: 'green',
-      amarillo: 'yellow',
-      negro: 'black',
-      blanco: 'white',
-      naranja: 'orange',
-      rosa: 'pink',
-      gris: 'gray',
+      rojo: '#e74c3c',
+      azul: '#3498db',
+      verde: '#27ae60',
+      amarillo: '#f1c40f',
+      negro: '#2c3e50',
+      blanco: '#ecf0f1',
+      naranja: '#e67e22',
+      rosa: '#fd79a8',
+      gris: '#7f8c8d',
       rainbow: 'rainbow'
     };
     return colors[name.toLowerCase()] || name;
@@ -71,7 +98,6 @@
     } else if (act === 'HIDE') {
       el.style.display = 'none';
     } else if (act === 'HOVER') {
-      // Parseamos valor simple: ejemplo "COLOR ROJO SCALE 1.05"
       const props = value.trim().split(/\s+/);
       let color = null;
       let scale = null;
@@ -86,7 +112,12 @@
         }
       }
 
-      const originalStyle = el.getAttribute('style') || '';
+      // Guardamos estilos originales para restaurar luego
+      const originalColor = el.style.color || '';
+      const originalTransform = el.style.transform || '';
+      const originalTransition = el.style.transition || '';
+
+      el.style.transition = 'all 0.3s ease';
 
       el.addEventListener('mouseenter', () => {
         if (color) el.style.color = color;
@@ -94,7 +125,9 @@
       });
 
       el.addEventListener('mouseleave', () => {
-        el.style.cssText = originalStyle;
+        el.style.color = originalColor;
+        el.style.transform = originalTransform;
+        el.style.transition = originalTransition;
       });
 
     } else if (act === 'CLICK') {
@@ -128,17 +161,14 @@
       const leftTrim = left.trim();
       const rightTrim = right ? right.trim() : '';
 
-      // Extraer alias (entre comillas)
       const aliasMatch = leftTrim.match(/"([^"]+)"/);
       if (!aliasMatch) {
         console.warn(`Alias no válido en línea: ${line}`);
         continue;
       }
 
-      const alias = aliasMatch[1]; // Ej: imagen1
-
-      // Acción = todo lo que sobra en leftTrim menos el alias (y espacios)
-      const action = leftTrim.replace(aliasMatch[0], '').trim(); // Ej: HOVER, CLICK, HIDE ON CLICK
+      const alias = aliasMatch[1];
+      const action = leftTrim.replace(aliasMatch[0], '').trim();
 
       pendingEvents.push({ alias, action, value: rightTrim });
       continue;
@@ -161,32 +191,54 @@
     const container = createSectionIfNeeded(section);
     let el;
 
-    if (component === 'TEXT') {
-      el = document.createElement('p');
-      el.textContent = val;
-    } else if (component === 'BUTTON') {
-      el = document.createElement('button');
-      el.textContent = val;
-      el.style.margin = '5px';
-      el.style.padding = '6px 14px';
-      el.style.borderRadius = '6px';
-      el.style.border = 'none';
-      el.style.background = '#eee';
-      el.style.cursor = 'pointer';
-    } else if (component === 'IMAGE') {
-      el = document.createElement('img');
-      el.src = val;
-      el.alt = alias || 'image';
-      el.style.maxWidth = '100%';
-      el.style.borderRadius = '8px';
-      el.style.display = 'block';
-      el.style.margin = '10px auto';
-    } else if (['COLOR', 'ALIGN', 'BACKGROUND', 'SIZE'].includes(component.toUpperCase())) {
-      applyStyle(container, component, val);
-      continue;
-    } else {
-      el = document.createElement('div');
-      el.textContent = val;
+    switch (component.toUpperCase()) {
+      case 'TEXT':
+        el = document.createElement('p');
+        el.textContent = val;
+        el.style.marginBottom = '16px';
+        break;
+
+      case 'BUTTON':
+        el = document.createElement('button');
+        el.textContent = val;
+        el.style.margin = '5px 10px 10px 0';
+        el.style.padding = '10px 20px';
+        el.style.borderRadius = '8px';
+        el.style.border = 'none';
+        el.style.background = '#3498db';
+        el.style.color = '#fff';
+        el.style.fontWeight = '600';
+        el.style.cursor = 'pointer';
+        el.style.boxShadow = '0 3px 6px rgba(0, 0, 0, 0.1)';
+        el.style.transition = 'background-color 0.3s ease';
+        el.addEventListener('mouseenter', () => el.style.backgroundColor = '#2980b9');
+        el.addEventListener('mouseleave', () => el.style.backgroundColor = '#3498db');
+        break;
+
+      case 'IMAGE':
+        el = document.createElement('img');
+        el.src = val;
+        el.alt = alias || 'image';
+        el.style.maxWidth = '100%';
+        el.style.borderRadius = '12px';
+        el.style.display = 'block';
+        el.style.margin = '15px auto';
+        el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+        break;
+
+      case 'COLOR':
+      case 'ALIGN':
+      case 'BACKGROUND':
+      case 'SIZE':
+      case 'BORDER':
+        applyStyle(container, component, val);
+        continue;
+
+      default:
+        el = document.createElement('div');
+        el.textContent = val;
+        el.style.marginBottom = '16px';
+        break;
     }
 
     if (alias) {
