@@ -1,11 +1,71 @@
-MAIN IMAGE "imagen1" = senna.png
-MAIN BUTTON "boton1" = Presioname
-MAIN BUTTON "boton2" = Saludar
-MAIN TEXT = ¡Bienvenido a Pro-Builder!
+~ Página de ejemplo con carrusel funcional, --hide y --show
+~ Cafetería con elementos ocultos y botones para mostrarlos
 
+~ Título principal
+MAIN TEXT = ☕ Bienvenidos a Café Aroma - El mejor café de la ciudad
+
+~ Definimos las imágenes para el carrusel
+MAIN IMAGE "cafe1" --hide = https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=500&fit=crop
+MAIN IMAGE "cafe2" --hide = https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&h=500&fit=crop  
+MAIN IMAGE "cafe3" --hide = https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=500&fit=crop
+
+~ Creamos el carrusel principal - FUNCIONAL con botones y indicadores
+MAIN IMAGE.CARRUSEL "carruselPrincipal" = "cafe1" "cafe2" "cafe3"
+"carruselPrincipal" STYLE = carrusel.estilo3
+
+~ Descripción del negocio
+MAIN TEXT = Desde 1985, Café Aroma ha sido el corazón de nuestra comunidad. Ofrecemos los mejores granos de café del mundo, tostados artesanalmente cada mañana.
+
+~ Imagen oculta que se mostrará con botón
+MAIN IMAGE "imagenSecreta" --hide = https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=400&fit=crop
+
+~ Texto oculto sobre especialidades
+MAIN TEXT "especialidades" --hide = 🌟 Nuestras Especialidades
+
+MAIN TEXT "listaEspecialidades" --hide = ✓ Espresso perfecto preparado por baristas expertos
+✓ Cappuccinos cremosos con arte latte personalizado  
+✓ Pasteles y croissants horneados frescos diariamente
+✓ Ambiente acogedor perfecto para trabajar o relajarse
+
+~ Botones principales - algunos ocultos
+MAIN BUTTON "botonMenu" = Ver Nuestro Menú
+"botonMenu" STYLE = boton.estilo1
+
+MAIN BUTTON "botonMostrarInfo" = 🎉 Mostrar Información Especial
+"botonMostrarInfo" STYLE = boton.estilo4
+
+MAIN BUTTON "botonUbicacion" --hide = ¿Cómo Llegar?
+"botonUbicacion" STYLE = boton.estilo3
+
+MAIN BUTTON "botonReserva" = Reservar Mesa
+"botonReserva" STYLE = boton.estilo2
+
+~ Información adicional
+MAIN TEXT = 📍 Nos encontramos en el centro de la ciudad, abiertos todos los días de 7:00 AM a 10:00 PM
+
+~ Segundo carrusel oculto inicialmente
+MAIN IMAGE "producto1" --hide = https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop
+MAIN IMAGE "producto2" --hide = https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop
+MAIN IMAGE "producto3" --hide = https://images.unsplash.com/photo-1461023058943-07fcf741fc7c?w=400&h=300&fit=crop
+
+MAIN IMAGE.CARRUSEL "carruselProductos" = "producto1" "producto2" "producto3"
+"carruselProductos" STYLE = carrusel.estilo1
+
+MAIN TEXT "textoProductos" --hide = 🍰 Nuestros Productos Destacados - ¡Hechos con amor cada día!
+
+~ Botón para mostrar todo lo oculto
+MAIN BUTTON "botonMostrarTodo" = 🚀 ¡Descubrir Todo!
+"botonMostrarTodo" STYLE = boton.estilo5
+
+~ Eventos y acciones
 EVENTS:
-"boton2" HOVER = COLOR rojo SCALE 1.05
-"imagen1" HOVER = SCALE 1.1
-"boton2" CLICK = ALERT ¡Hola, amigo!
-"boton1" CLICK = REDIRECT https://wikipedia.org
-"imagen1" HIDEONCLICK =
+"botonMenu" CLICK = ALERT 🍰 Menú: Café Americano $3.50, Cappuccino $4.25, Croissant $2.75, Cheesecake $5.00
+"botonMostrarInfo" CLICK = SHOW "especialidades"
+"botonUbicacion" CLICK = REDIRECT https://maps.google.com
+"botonReserva" CLICK = ALERT 📞 Para reservas llamar al: +1-555-CAFE (2233)
+"botonMostrarTodo" CLICK = SHOW "producto1"
+"especialidades" CLICK = SHOW "listaEspecialidades"
+"listaEspecialidades" CLICK = SHOW "botonUbicacion"
+"botonUbicacion" CLICK = SHOW "botonReserva"
+"botonReserva" CLICK = SHOW "carruselProductos"
+"carruselProductos" CLICK = SHOW "textoProductos"
