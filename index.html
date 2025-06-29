@@ -67,6 +67,16 @@
       padding-left: 1rem;
     }
 
+    pre {
+      background:#f4f4f4;
+      padding:10px;
+      border-radius:5px;
+      overflow-x:auto;
+      font-family: Consolas, monospace;
+      font-size: 1rem;
+      margin: 1rem 0;
+    }
+
     a.cta-button {
       display: inline-block;
       background: #3498db;
@@ -119,6 +129,22 @@
       <h2>¿Cómo funciona?</h2>
       <p>Solo necesitas dos archivos: un <code>index.html</code> que carga nuestra librería, y un archivo <code>void.adzonda</code> donde escribes la estructura y contenido de tu sitio en lenguaje AdZonda.</p>
       <a href="https://github.com/tu-usuario/adzonda" target="_blank" class="cta-button">Ver en GitHub</a>
+    </section>
+
+    <section>
+      <h2>¿Cómo añadir AdZonda a tu proyecto?</h2>
+      <p>Para usar AdZonda y Pro-Builder en tu sitio web, solo necesitas:</p>
+      <ul>
+        <li>Un archivo <code>index.html</code> con esta línea para incluir la librería:</li>
+      </ul>
+      <pre>
+&lt;script src="https://mrmorcilla.github.io/AdZonda/pro-builder.js"&gt;&lt;/script&gt;
+      </pre>
+      <ul>
+        <li>Un archivo <code>void.adzonda</code> en la misma carpeta, que contenga la estructura y contenido de tu sitio usando el lenguaje AdZonda.</li>
+      </ul>
+      <p>La librería se encargará de leer <code>void.adzonda</code>, interpretar su contenido y construir automáticamente tu página con estilos y eventos.</p>
+      <p>Así podrás crear sitios profesionales sin escribir código HTML, CSS o JavaScript manualmente.</p>
     </section>
   </main>
 
