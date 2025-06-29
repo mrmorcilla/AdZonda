@@ -1,0 +1,10 @@
+MAIN IMAGE "imagen1" = logo.jpg
+MAIN BUTTON "boton1" = Presioname
+MAIN BUTTON "boton2" = Saludar
+
+EVENTS:
+"boton2" = STYLE BACKGROUND RED
+"imagen1" HOVER = COLOR ROJO SCALE 1.05
+"boton2" CLICK = ALERT ¡Hola, amigo!
+"boton1" CLICK = REDIRECT https://wikipedia.org
+"imagen1" HIDEONCLICK = HIDEONCLICK

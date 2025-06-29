@@ -1,1 +1,83 @@
 
+/* Estilo básico y moderno */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0c1b2a;
+  color: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+header {
+  background: #1261a0;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 480px;
+  padding: 1.5rem;
+}
+
+#ads-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ad {
+  background: #184a8b;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 8px #0f3a6c inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  color: #cce6ff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+button {
+  background-color: #1261a0;
+  color: #f0f4f8;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+button:hover {
+  background-color: #0f4d7a;
+}
+
+footer {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #6a7a8a;
+  text-align: center;
+}
