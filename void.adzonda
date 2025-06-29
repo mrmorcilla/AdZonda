@@ -1,4 +1,4 @@
-MAIN IMAGE "imagen1" = logo.jpg
+MAIN IMAGE "imagen1" = senna.png
 MAIN BUTTON "boton1" = Presioname
 MAIN BUTTON "boton2" = Saludar
 MAIN TEXT = ¡Bienvenido a Pro-Builder!
